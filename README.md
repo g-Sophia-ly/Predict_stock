@@ -1,4 +1,3 @@
-# Predict_stock
 # 📈 Predict_stock
 
 ## 1️⃣ Project Background

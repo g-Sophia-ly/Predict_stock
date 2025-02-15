@@ -1,7 +1,7 @@
 # 📈 Predict_stock
 
 ## 1️⃣ Project Background
-This project is part of the **Forecasting Sticker Sales** competition, where the goal is to predict **sales volume (`num_sold`)** for different **countries, store types, and product categories**. The dataset provides **historical sales data from 2010 to 2019**, and we aim to use **time series analysis** and **machine learning models** to make accurate predictions.
+This project is part of the **Kaggle Playground Series S5E1** competition, where the goal is to predict **sales volume (`num_sold`)** for different **countries, store types, and product categories**. The dataset provides **historical sales data from 2010 to 2019**, and we aim to use **time series analysis** and **machine learning models** to make accurate predictions.
 
 ## 2️⃣ Data Exploration & Analysis
 ### 📊 Dataset Overview
@@ -34,8 +34,8 @@ To determine whether the data is stationary, we conducted the **Augmented Dickey
    - **Online Stores** had lower sales but showed **growth from 2018-2019**.
 
 4. **Sales by Product**:
-   - **Top-selling product**: **Kaggle Stickers** 🎟️
-   - **Lowest-selling product**: **Holographic Goose Stickers** 🦢
+   - **Top-selling product**: **Kaggle Stickers**
+   - **Lowest-selling product**: **Holographic Goose Stickers**
    - **Kaggle Tiers & Kerneler Dark Mode Stickers** had **stable sales** with **less seasonal variation**.
 
 ## 3️⃣ Feature Engineering 🛠️
@@ -52,37 +52,39 @@ To enhance our model's predictive performance, we engineered several key feature
 3. **Categorical Feature Encoding**
    - One-Hot Encoding applied to `country`, `store`, and `product` to improve model learning.
 
-## 4️⃣ Machine Learning Models 🤖
-We trained and evaluated multiple models for sales forecasting:
+## 4️⃣ Machine Learning Model - LightGBM
+We trained and evaluated **LightGBM (LGBMRegressor)** for sales forecasting using **5-Fold Cross Validation**:
 
-| **Model** | **RMSE (Root Mean Squared Error)** 📉 |
-|-----------|---------------------------------|
-| Linear Regression | 412.87 |
-| Random Forest | 298.53 |
-| XGBoost | **247.19** 🏆 |
-| ARIMA (Time Series Model) | 285.64 |
+- **Hyperparameters Used**:
+  - `num_leaves`: 426, `max_depth`: 20, `learning_rate`: 0.011
+  - `n_estimators`: 1000, `metric`: 'rmse', `early_stopping_rounds`: 200
+  - Regularization parameters (`reg_alpha`, `reg_lambda`) were optimized.
 
-- **🏆 Best Model: XGBoost**
-  - Achieved the **lowest RMSE of 247.19**.
-  - Performed well on high-sales months but had minor errors in low-sales months.
+- **Evaluation Metrics**:
+  - **Root Mean Squared Error (RMSE)**: Measures overall model accuracy.
+  - **Mean Absolute Percentage Error (MAPE)**: Evaluates relative percentage errors.
 
-- **📉 ARIMA (Time Series Model)** also performed well:
-  - Suitable for long-term forecasting.
-  - Struggled with unexpected spikes during **holiday periods**.
+- **Results**:
+  - **Fold 1 MAPE**: 0.0148
+  - **Fold 2 MAPE**: 0.0150
+  - **Fold 3 MAPE**: 0.0154
+  - **Fold 4 MAPE**: 0.0156
+  - **Fold 5 MAPE**: 0.0151
+  - **Overall MAPE (LightGBM)**: **0.0152**
+  - **LightGBM performed well**, capturing seasonality patterns but with slight underestimation during holiday peaks.
 
 ## 5️⃣ Prediction Results 📌
-Final **XGBoost model predictions** vs. **actual sales**:
+Final **LightGBM model predictions** vs. **actual sales**:
 - **Overall error is low**, but holiday sales fluctuations could be improved.
 - **Seasonal patterns were well captured**, though some months (e.g., Black Friday sales) had deviations.
 
 ## 6️⃣ Conclusions & Future Improvements 🚀
 ### 🔍 Key Takeaways
-- **Sales are highly seasonal**, especially during holidays 🎄.
-- **XGBoost performed best**, but integrating time series models can further improve results.
+- **Sales are highly seasonal**, especially during holidays.
+- **LightGBM performed well**, but incorporating time-series models could improve long-term trends.
 - **Sales patterns differ across countries & stores**, requiring tailored forecasting strategies.
 
 ### 🔧 Future Enhancements
 1. **Advanced Time Series Models**: Try **LSTM or Prophet** for improved long-term forecasting.
 2. **Holiday Effects Optimization**: Assign higher weights to holiday seasons.
 3. **AutoML for Hyperparameter Tuning**: Optimize models automatically to enhance accuracy.
-

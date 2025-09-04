@@ -1,10 +1,10 @@
-# 📈 Predict_stock
+# Predict_stock
 
 ## 1️⃣ Project Background
 This project is part of the **Kaggle Playground Series S5E1** competition, where the goal is to predict **sales volume (`num_sold`)** for different **countries, store types, and product categories**. The dataset provides **historical sales data from 2010 to 2019**, and we aim to use **time series analysis** and **machine learning models** to make accurate predictions.
 
 ## 2️⃣ Data Exploration & Analysis
-### 📊 Dataset Overview
+### Dataset Overview
 - **Total Records**: **230,130 entries**, with 6 features (`id`, `date`, `country`, `store`, `product`, `num_sold`).
 - **Target Variable (`num_sold`) Summary**:
   - **Average sales**: 752.53
@@ -12,7 +12,7 @@ This project is part of the **Kaggle Playground Series S5E1** competition, where
   - **Range**: **Min 5**, **Max 5939**
   - **Missing values**: **8,871 missing values** in `num_sold`
 
-### 📈 Time Series Analysis
+### Time Series Analysis
 To determine whether the data is stationary, we conducted the **Augmented Dickey-Fuller (ADF) test**:
 - **ADF Test Statistic**: -32.51
 - **p-value**: 0.0
@@ -20,13 +20,13 @@ To determine whether the data is stationary, we conducted the **Augmented Dickey
   - Since **p-value < 0.05**, we **reject the null hypothesis**, meaning the data is **stationary**.
   - This makes it suitable for **time series forecasting models** like **ARIMA, LSTM, or Prophet**.
 
-### 📅 Sales Trends & Insights
+### Sales Trends & Insights
 1. **Overall Sales Trend**:
    - **Strong seasonal patterns** where sales **peak every December** due to holiday promotions.
    - **Sales increased from 2017 to 2019**, but the growth rate slowed down.
 
 2. **Sales by Country**:
-   - **Highest sales**: 🇺🇸 **USA**, followed by 🇨🇦 **Canada** and 🇯🇵 **Japan**.
+   - **Highest sales**: **USA**, followed by **Canada** and **Japan**.
    - **Lowest sales**: 🇫🇮 **Finland**.
 
 3. **Sales by Store Type**:
@@ -73,18 +73,18 @@ We trained and evaluated **LightGBM (LGBMRegressor)** for sales forecasting usin
   - **Overall MAPE (LightGBM)**: **0.0152**
   - **LightGBM performed well**, capturing seasonality patterns but with slight underestimation during holiday peaks.
 
-## 5️⃣ Prediction Results 📌
+## 5️⃣ Prediction Results
 Final **LightGBM model predictions** vs. **actual sales**:
 - **Overall error is low**, but holiday sales fluctuations could be improved.
 - **Seasonal patterns were well captured**, though some months (e.g., Black Friday sales) had deviations.
 
-## 6️⃣ Conclusions & Future Improvements 🚀
-### 🔍 Key Takeaways
+## 6️⃣ Conclusions & Future Improvements
+### Key Takeaways
 - **Sales are highly seasonal**, especially during holidays.
 - **LightGBM performed well**, but incorporating time-series models could improve long-term trends.
 - **Sales patterns differ across countries & stores**, requiring tailored forecasting strategies.
 
-### 🔧 Future Enhancements
+### Future Enhancements
 1. **Advanced Time Series Models**: Try **LSTM or Prophet** for improved long-term forecasting.
 2. **Holiday Effects Optimization**: Assign higher weights to holiday seasons.
 3. **AutoML for Hyperparameter Tuning**: Optimize models automatically to enhance accuracy.
